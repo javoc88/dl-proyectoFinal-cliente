@@ -3,7 +3,7 @@ import "./App.css";
 const App = () => {
   return (
     <>
-      <h1>Hola Mundo!</h1>
+      <h1>NexGen License Store</h1>
     </>
   );
 };
