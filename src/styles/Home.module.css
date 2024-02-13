@@ -1,0 +1,48 @@
+.home {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+.title {
+  margin: 0;
+  font-size: 3rem;
+  line-height: 1.2;
+}
+
+.description {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.button {
+  font-size: 1.2rem;
+  padding: 0.7rem 2rem;
+  border: none;
+  border-radius: 0.3rem;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://conecta.tec.mx/sites/default/files/styles/header_full/public/2023-06/software-ping2log-tec-campus-toluca.jpg?itok=5409rdEp");
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.4);
+}
