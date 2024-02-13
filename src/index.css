@@ -119,10 +119,6 @@ ul {
   width: 100%;
   margin-top: 1rem;
   color: white;
-  display: flex;
   align-items: center;
   text-align: center;
-  position: fixed;
-  left: 0;
-  bottom: 0;
 }

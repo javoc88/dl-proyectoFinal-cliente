@@ -1,44 +1,31 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import styles from "./Footer.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faInstagram, faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
+  const socialLinks = [
+    { icon: faFacebook, link: "#" },
+    { icon: faInstagram, link: "#" },
+    { icon: faTwitter, link: "#" },
+  ];
+
   return (
-    <footer className="bg-light py-5">
-      <Container>
-        <Row>
-          <Col xs={12} md={4}>
-            <h5>Sección de Información</h5>
-            <p>Contacto:</p>
-            <ul>
-              <li>¿Tienes preguntas o comentarios? ¡Contáctanos!</li>
-              <li>Correo Electrónico: info@nexgenlicense.com</li>
-              <li>Teléfono: +123 456 7890</li>
-            </ul>
-          </Col>
-          <Col xs={12} md={4}>
-            <h5>Redes Sociales</h5>
-            <p>Conéctate con nosotros:</p>
-            <a href="#">
-              <i className="fa-brands fa-facebook"></i>
-            </a>
-            <a href="#">
-              <i className="fa-brands fa-instagram"></i>
-            </a>
-            <a href="#">
-              <i className="fa-brands fa-x-twitter"></i>
-            </a>
-          </Col>
-        </Row>
-      </Container>
-      <Container fluid>
-        <Row>
-          <Col className="text-center mt-4">
-            <p className="mb-0 text-muted">
-              Copyright © 2023 NexGen License. All Rights Reserved.
-            </p>
-          </Col>
-        </Row>
-      </Container>
+    <footer className={styles.footer}>
+      <div className={styles.container}>
+        <p className={styles.copyright}>
+          &copy; 2023 NexGen License. All Rights Reserved.
+        </p>
+        <ul className={styles.socialList}>
+          {socialLinks.map((link, index) => (
+            <li key={index}>
+              <a href={link.link}>
+                <FontAwesomeIcon icon={link.icon} className={styles.socialIcon} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </footer>
   );
 };
