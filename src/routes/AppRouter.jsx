@@ -9,6 +9,7 @@ import EditProduct from "../pages/EditProduct";
 import UserProfile from "../pages/UserProfile";
 import NotFound from "../pages/NotFound";
 import EditProfile from "../pages/EditProfile";
+import CartPage from "../pages/Cart";
 
 const AppRouter = () => {
   return (
@@ -22,7 +23,7 @@ const AppRouter = () => {
       <Route path="/productos/:id" element={<Home />} />
       <Route path="/crear" element={<CreateProduct />} />
       <Route path="/editar" element={<EditProduct />} />
-      <Route path="/cart" element={<Home />} />
+      <Route path="/cart" element={<CartPage />} />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );
