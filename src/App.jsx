@@ -7,6 +7,8 @@ import Banner from "./components/Banner";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CreateProduct from "./pages/CreateProduct";
 import EditProduct from "./pages/EditProduct";
+import LoginPage from "./pages/Login";
+import RegisterPage from "./pages/Register";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/registro" element={<RegisterPage />} />
           <Route path="/productos" element={<Home />} />
           <Route path="/productos/:id" element={<Home />} />
           <Route path="/crear" element={<CreateProduct />} />
