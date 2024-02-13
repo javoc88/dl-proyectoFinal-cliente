@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-// import { useContext } from "react";
-// import { Context } from "../context/Context";
+import { useContext } from "react";
+import ProductContext from "../context/ProductContext";
 import { Link } from "react-router-dom";
-// import { PopUp } from "./PopUp";
 import { Cart } from "react-bootstrap-icons";
+import PopUp from "../components/PopUp";
 
 const Products = () => {
   const {
@@ -13,29 +13,21 @@ const Products = () => {
     handleClosePopUp,
     showPopUp,
     formatCurrency,
-  } = useContext(Context);
+  } = useContext(ProductContext);
 
   return (
     <Container>
       <Row xs={1} sm={2} md={3}>
         {products.slice(0, 6).map((product) => (
-          <Col className="mb-4" key={product.name}>
+          <Col className="mb-4" key={product.nombre}>
             <Card className="product-card">
-              <Card.Img variant="top" src={product.img} alt={product.name} />
+              <Card.Img variant="top" src={product.img_url} alt={product.nombre} />
               <Card.Body>
                 <Card.Title>
-                  <h3 className="text-capitalize">{product.name}</h3>
+                  <h3 className="text-capitalize">{product.nombre}</h3>
                 </Card.Title>
-                <div className="card-text text-capitalize">
-                  <h5>Ingredientes:</h5>
-                  <ul>
-                    {product.ingredients.map((ingredient, index) => (
-                      <li key={index}>&#x1F355; {ingredient}</li>
-                    ))}
-                  </ul>
-                </div>
                 <Card.Footer className="text-center">
-                  <h3>{formatCurrency(product.price)}</h3>
+                  <h3>{formatCurrency(product.precio)}</h3>
                 </Card.Footer>
                 <Link to={`/product/${product.id}`}>
                   <Button variant="warning" className="w-100 mb-2">
@@ -55,9 +47,9 @@ const Products = () => {
         ))}
       </Row>
 
-      {/* <PopUp show={showPopUp} handleClose={handleClosePopUp} /> */}
+      <PopUp show={showPopUp} handleClose={handleClosePopUp} />
     </Container>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

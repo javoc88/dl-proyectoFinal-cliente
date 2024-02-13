@@ -9,8 +9,7 @@ const PopUp = ({
   onCheckout,
 }) => {
   return (
-    <Modal show={show} onHide={handleClose} backdrop="static"
-    keyboard={false}>
+    <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
       <Modal.Header closeButton>
         <Modal.Title>Producto agregado</Modal.Title>
       </Modal.Header>
