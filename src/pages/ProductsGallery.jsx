@@ -1,7 +1,7 @@
 import React from 'react'
 import Products from '../components/Products'
 
-const ProductsGallery = () => {
+const GalleryPage = () => {
   return (
     <div className="container-home">
       <div className="container text-uppercase">
@@ -12,4 +12,4 @@ const ProductsGallery = () => {
   )
 }
 
-export default ProductsGallery
+export default GalleryPage

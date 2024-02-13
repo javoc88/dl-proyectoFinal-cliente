@@ -3,7 +3,7 @@ import { Button, Card, Col, Container, Row } from "react-bootstrap";
 // import { useContext } from "react";
 // import { Context } from "../context/Context";
 import { Link } from "react-router-dom";
-import { PopUp } from "./PopUp";
+// import { PopUp } from "./PopUp";
 import { Cart } from "react-bootstrap-icons";
 
 const Products = () => {
@@ -55,7 +55,7 @@ const Products = () => {
         ))}
       </Row>
 
-      <PopUp show={showPopUp} handleClose={handleClosePopUp} />
+      {/* <PopUp show={showPopUp} handleClose={handleClosePopUp} /> */}
     </Container>
   )
 }
