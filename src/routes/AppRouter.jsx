@@ -8,6 +8,7 @@ import CreateProduct from "../pages/CreateProduct";
 import EditProduct from "../pages/EditProduct";
 import UserProfile from "../pages/UserProfile";
 import NotFound from "../pages/NotFound";
+import EditProfile from "../pages/EditProfile";
 
 const AppRouter = () => {
   return (
@@ -16,6 +17,7 @@ const AppRouter = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registro" element={<RegisterPage />} />
       <Route path="/perfil" element={<UserProfile />} />
+      <Route path="/perfil/editar" element={<EditProfile />} />
       <Route path="/productos" element={<GalleryPage />} />
       <Route path="/productos/:id" element={<Home />} />
       <Route path="/crear" element={<CreateProduct />} />
