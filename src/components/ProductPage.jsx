@@ -40,9 +40,6 @@ const ProductPage = () => {
               <hr />
               <p>{product.descripcion}</p>
               <p>
-                <strong>Especificaciones:</strong> {product.detalle}
-              </p>
-              <p>
                 <strong>Precio:</strong> {formatCurrency(product.precio)}
               </p>
             </div>
