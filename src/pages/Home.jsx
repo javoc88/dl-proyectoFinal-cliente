@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "../styles/Home.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles.home}>
       <div className={styles.hero}>
@@ -11,7 +13,12 @@ const Home = () => {
           competitivos, una amplia gama de software y servicios adicionales para
           satisfacer todas tus necesidades.
         </p>
-        <button className={styles.button}>Start Now</button>
+        <button
+          className={styles.button}
+          onClick={() => navigate("/productos")}
+        >
+          Start Now
+        </button>
       </div>
       <div className={styles.background}></div>
     </div>
