@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 
 const PopUp = ({
-  // escribir lógica de los botones y demás componentes aquí.
   show,
   handleClose,
   onContinueShopping,
