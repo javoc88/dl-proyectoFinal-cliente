@@ -45,4 +45,5 @@
   background-size: cover;
   background-position: center;
   filter: brightness(0.4);
+  z-index: -1;
 }
