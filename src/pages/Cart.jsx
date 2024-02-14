@@ -112,7 +112,7 @@ const CartPage = () => {
       )}
       <div className="float-end">
         <Button variant="warning" className="button-cart">
-          <Link to="/">Ver más productos</Link>
+          <Link to="/productos">Ver más productos</Link>
         </Button>
       </div>
     </div>
