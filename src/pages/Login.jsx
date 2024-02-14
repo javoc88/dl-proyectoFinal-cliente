@@ -35,7 +35,7 @@ const LoginPage = () => {
           <label htmlFor="remember-me">Recordar sesión</label>
         </div>
         <button type="submit">Login</button>
-        <a href="#">¿No tienes una cuenta? Crea una cuenta aquí</a>
+        <a href="/registro">¿No tienes una cuenta? Crea una cuenta aquí</a>
       </form>
     </div>
   );
