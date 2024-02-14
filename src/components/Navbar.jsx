@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Cart } from "react-bootstrap-icons";
@@ -8,10 +8,10 @@ import ProductContext from "../context/ProductContext";
 const MyNavBar = () => {
   const [user, setUser] = useState(null);
   const { GetCartTotal } = useContext(ProductContext);
+  const navigate = useNavigate();
 
   const handleLogin = () => {
-    // Agregar lógica para iniciar sesión
-    setUser("User Name");
+    navigate("/login");
   };
 
   const handleLogout = () => {
