@@ -1,12 +1,7 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 
-const PopUp = ({
-  show,
-  handleClose,
-  onContinueShopping,
-  onCheckout,
-}) => {
+const PopUp = ({ show, handleClose, onContinueShopping, onCheckout }) => {
   return (
     <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
       <Modal.Header closeButton>
@@ -14,7 +9,7 @@ const PopUp = ({
       </Modal.Header>
       <Modal.Body>Tu producto se ha agregado al carrito con éxito.</Modal.Body>
       <Modal.Footer>
-        <Button variant="success" onClick={handleClose}>
+        <Button variant="primary" onClick={handleClose}>
           Seguir comprando
         </Button>
       </Modal.Footer>

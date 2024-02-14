@@ -60,7 +60,7 @@ const CartPage = () => {
                 <div className="button-card">
                   <div className="quantity-buttons">
                     <Button
-                      variant="success"
+                      variant="primary"
                       className="m-2"
                       onClick={() => incrementQuantity(productID)}
                     >
@@ -100,7 +100,7 @@ const CartPage = () => {
               {formatCurrency(parseFloat(calculateTotal()))}
             </span>
           </h4>
-          <Button variant="success" className="button-cart">
+          <Button variant="primary" className="button-cart">
             💳 Continuar compra
           </Button>
         </div>
@@ -111,7 +111,7 @@ const CartPage = () => {
         </div>
       )}
       <div className="float-end">
-        <Button variant="warning" className="button-cart">
+        <Button variant="secondary" className="button-cart">
           <Link to="/productos">Ver más productos</Link>
         </Button>
       </div>
