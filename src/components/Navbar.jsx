@@ -29,10 +29,12 @@ const MyNavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Navbar.Text>
-            <Button variant="outline-light">
-              <Cart />
-              <GetCartTotal />
-            </Button>
+            <Nav.Link as={Link} to="/cart" className="mr-2">
+              <Button variant="outline-light">
+                <Cart />
+                <GetCartTotal />
+              </Button>
+            </Nav.Link>
           </Navbar.Text>
           {user ? (
             <Navbar.Text>
