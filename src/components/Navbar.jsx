@@ -47,7 +47,7 @@ const MyNavBar = () => {
           ) : (
             <>
               <Navbar.Text>
-                <Nav.Link as={Link} to="/perfil" className="mr-2">
+                <Nav.Link as={Link} to="/login" className="mr-2">
                   <Button variant="outline-light" onClick={handleLogin}>
                     Login
                   </Button>
