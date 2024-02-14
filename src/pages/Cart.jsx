@@ -46,7 +46,7 @@ const CartPage = () => {
               <div className="d-flex justify-content-between align-items-center text-capitalize">
                 <div>
                   <img
-                    src={product.img}
+                    src={product.img_url}
                     alt={product.nombre}
                     style={{
                       height: "100px",
@@ -75,8 +75,8 @@ const CartPage = () => {
                       ➖
                     </Button>
                   </div>
-                  <h4 className="text-success text-center">
-                    {formatCurrency(product.price * quantity)}
+                  <h4 className="text-center">
+                    {formatCurrency(product.precio * quantity)}
                   </h4>
                   <Button
                     variant="danger"
@@ -96,7 +96,7 @@ const CartPage = () => {
         <div className="d-flex justify-content-between align-items-center mt-3">
           <h4>
             <strong>Total a pagar: </strong>
-            <span className="text-success h2">
+            <span className="text-primary h2">
               {formatCurrency(parseFloat(calculateTotal()))}
             </span>
           </h4>
