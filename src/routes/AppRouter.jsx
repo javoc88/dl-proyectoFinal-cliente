@@ -10,6 +10,7 @@ import UserProfile from "../pages/UserProfile";
 import NotFound from "../pages/NotFound";
 import EditProfile from "../pages/EditProfile";
 import CartPage from "../pages/Cart";
+import ProductPage from "../components/ProductPage";
 
 const AppRouter = () => {
   return (
@@ -20,7 +21,7 @@ const AppRouter = () => {
       <Route path="/perfil" element={<UserProfile />} />
       <Route path="/perfil/editar" element={<EditProfile />} />
       <Route path="/productos" element={<GalleryPage />} />
-      <Route path="/productos/:id" element={<Home />} />
+      <Route path="/productos/:id" element={<ProductPage />} />
       <Route path="/crear" element={<CreateProduct />} />
       <Route path="/editar" element={<EditProduct />} />
       <Route path="/cart" element={<CartPage />} />

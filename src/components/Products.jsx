@@ -33,7 +33,7 @@ const Products = () => {
                 <Card.Footer className="text-center">
                   <h3>{formatCurrency(product.precio)}</h3>
                 </Card.Footer>
-                <Link to={`/product/${product.id}`}>
+                <Link to={`/productos/${product.id}`}>
                   <Button variant="secondary" className="w-100 mb-2">
                     Más detalles 🔍
                   </Button>
