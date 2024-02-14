@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Cart } from "react-bootstrap-icons";
+import ProductContext from "../context/ProductContext";
 
 const MyNavBar = () => {
   const [user, setUser] = useState(null);
-  const [cartItems, setCartItems] = useState(0);
+  const { GetCartTotal } = useContext(ProductContext);
 
   const handleLogin = () => {
-    // Replace with your login logic
+    // Agregar lógica para iniciar sesión
     setUser("User Name");
   };
 
   const handleLogout = () => {
     setUser(null);
-  };
-
-  const handleAddToCart = () => {
-    setCartItems(cartItems + 1);
   };
 
   return (
@@ -32,9 +29,9 @@ const MyNavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Navbar.Text>
-            <Button variant="outline-light" onClick={handleAddToCart}>
+            <Button variant="outline-light">
               <Cart />
-              {cartItems > 0 && <span className="ms-2">{cartItems}</span>}
+              <GetCartTotal />
             </Button>
           </Navbar.Text>
           {user ? (
