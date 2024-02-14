@@ -38,16 +38,20 @@ const MyNavBar = () => {
           </Navbar.Text>
           {user ? (
             <Navbar.Text>
-              <Button variant="outline-light" onClick={handleLogout}>
-                {user}
-              </Button>
+              <Nav.Link as={Link} to="/login" className="mr-2">
+                <Button variant="outline-light" onClick={handleLogout}>
+                  {user}
+                </Button>
+              </Nav.Link>
             </Navbar.Text>
           ) : (
             <>
               <Navbar.Text>
-                <Button variant="outline-light" onClick={handleLogin}>
-                  Login
-                </Button>
+                <Nav.Link as={Link} to="/perfil" className="mr-2">
+                  <Button variant="outline-light" onClick={handleLogin}>
+                    Login
+                  </Button>
+                </Nav.Link>
               </Navbar.Text>
             </>
           )}
