@@ -40,6 +40,38 @@ const ProductPage = () => {
               <hr />
               <p>{product.descripcion}</p>
               <p>
+                <strong>Especificaciones:</strong>
+                {Object.entries(product.detalle).map(([key, value]) => {
+                  const specName =
+                    key === "sistema_operativo"
+                      ? "Sistema operativo"
+                      : key
+                          .split("_")
+                          .map(
+                            (word) =>
+                              word.charAt(0).toUpperCase() + word.slice(1)
+                          )
+                          .join(" ");
+                  const valueList =
+                    typeof value === "object"
+                      ? Object.values(value).join(", ")
+                      : value;
+                  return (
+                    <p key={key}>
+                      {key === "sistema_operativo" ? (
+                        <>
+                          {specName}: {valueList}
+                        </>
+                      ) : (
+                        <>
+                          {specName}: {valueList}
+                        </>
+                      )}
+                    </p>
+                  );
+                })}
+              </p>
+              <p>
                 <strong>Precio:</strong> {formatCurrency(product.precio)}
               </p>
             </div>
