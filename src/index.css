@@ -51,6 +51,7 @@ ul {
 }
 
 .container-home {
+  padding-top: 1rem;
   padding-bottom: 4rem;
 }
 
@@ -86,7 +87,7 @@ ul {
 
 .button-cart a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 .button-card {
@@ -205,8 +206,12 @@ ul {
 .login-form .login-remember {
   display: flex;
   align-items: center;
+  justify-content: space-around;
   white-space: nowrap;
-  margin: 10px 0;
+}
+
+.login-form .login-remember label {
+  padding: 0px;
 }
 
 .login-form button {
