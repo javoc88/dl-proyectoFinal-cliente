@@ -68,6 +68,14 @@ const ProductProvider = ({ children }) => {
     return <span>Total: {cartTotal}</span>;
   };
 
+  const GetTotalProductCount = () => {
+    const totalCount = Object.values(cart).reduce(
+      (acc, count) => acc + count,
+      0
+    );
+    return <span>Total Products: {totalCount}</span>;
+  };
+
   const handleAddToCart = (product) => {
     const { id, ...rest } = product;
     addToCart({ ...rest, id: id ? id.toString() : "" });
@@ -92,6 +100,7 @@ const ProductProvider = ({ children }) => {
         handleClosePopUp,
         formatCurrency,
         GetCartTotal,
+        GetTotalProductCount,
       }}
     >
       {children}
