@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Cart } from "react-bootstrap-icons";
@@ -7,7 +7,8 @@ import ProductContext from "../context/ProductContext";
 
 const MyNavBar = () => {
   const [user, setUser] = useState(null);
-  const { GetCartTotal } = useContext(ProductContext);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { cart } = useContext(ProductContext);
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -16,44 +17,40 @@ const MyNavBar = () => {
 
   const handleLogout = () => {
     setUser(null);
+    setIsLoggedIn(false);
   };
 
   return (
-    <Navbar expand="lg" bg="dark" data-bs-theme="dark">
+    <Navbar expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand>
-          <Nav.Link as={Link} to="/" className="mr-2">
-            💻 NextGen Licences
-          </Nav.Link>
+        <Navbar.Brand as={NavLink} to="/" className="mr-2">
+          💻 NextGen Licences
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-          <Navbar.Text>
-            <Nav.Link as={Link} to="/cart" className="mr-2">
-              <Button variant="outline-light">
-                <Cart />
-                <GetCartTotal />
-              </Button>
-            </Nav.Link>
-          </Navbar.Text>
-          {user ? (
-            <Navbar.Text>
-              <Nav.Link as={Link} to="/login" className="mr-2">
-                <Button variant="outline-light" onClick={handleLogout}>
-                  {user}
+          <Nav>
+            {isLoggedIn && ( // Verifica si el usuario ha iniciado sesión
+              <Nav.Link as={NavLink} to="/cart" className="mr-2">
+                <Button variant="outline-light">
+                  <Cart />
+                  {Object.keys(cart).length > 0 && (
+                    <span className="ml-1">{Object.keys(cart).length}</span>
+                  )}
                 </Button>
               </Nav.Link>
-            </Navbar.Text>
-          ) : (
+            )}
+          </Nav>
+          {user ? (
             <>
-              <Navbar.Text>
-                <Nav.Link as={Link} to="/login" className="mr-2">
-                  <Button variant="outline-light" onClick={handleLogin}>
-                    Login
-                  </Button>
-                </Nav.Link>
-              </Navbar.Text>
+              <Navbar.Text className="mr-2">{user}</Navbar.Text>
+              <Button variant="outline-light" onClick={handleLogout}>
+                Logout
+              </Button>
             </>
+          ) : (
+            <Button variant="outline-light" onClick={handleLogin}>
+              Login
+            </Button>
           )}
         </Navbar.Collapse>
       </Container>
