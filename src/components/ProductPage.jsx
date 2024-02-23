@@ -11,6 +11,7 @@ const ProductPage = () => {
     handleClosePopUp,
     showPopUp,
     formatCurrency,
+    isLoggedIn, // Nuevo estado para verificar si el usuario está logeado
   } = useContext(ProductContext);
 
   const { id } = useParams();
@@ -76,15 +77,17 @@ const ProductPage = () => {
               </p>
             </div>
             <div className="float-end">
-              <Button
-                variant="primary"
-                className="button-cart"
-                onClick={() => handleAddToCart(product)}
-              >
-                Agregar al Carrito
-              </Button>
+              {isLoggedIn && ( // Verifica si el usuario está logeado
+                <Button
+                  variant="primary"
+                  className="button-cart"
+                  onClick={() => handleAddToCart(product)}
+                >
+                  Agregar al Carrito
+                </Button>
+              )}
               <Button variant="secondary" className="button-cart">
-                <Link to="/">Ver más productos</Link>
+                <Link to="/productos">Ver más productos</Link>
               </Button>
             </div>
           </Col>
