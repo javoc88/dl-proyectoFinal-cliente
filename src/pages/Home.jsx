@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../styles/Home.module.css";
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -13,12 +14,9 @@ const Home = () => {
           competitivos, una amplia gama de software y servicios adicionales para
           satisfacer todas tus necesidades.
         </p>
-        <button
-          className={styles.button}
-          onClick={() => navigate("/productos")}
-        >
-          Ir al catálogo
-        </button>
+        <Button variant="light" onClick={() => navigate("/productos")}>
+        Ir al catálogo
+      </Button>
       </div>
       <div className={styles.background}></div>
     </div>
