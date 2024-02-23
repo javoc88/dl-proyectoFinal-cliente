@@ -17,7 +17,7 @@ const Home = () => {
           className={styles.button}
           onClick={() => navigate("/productos")}
         >
-          Start Now
+          Ir al catálogo
         </button>
       </div>
       <div className={styles.background}></div>
