@@ -1,0 +1,23 @@
+[
+  {
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "email": "juan@example.com",
+    "password_hash": "hashed_password_1",
+    "id_cred": 1
+  },
+  {
+    "nombre": "María",
+    "apellido": "González",
+    "email": "maria@example.com",
+    "password_hash": "hashed_password_2",
+    "id_cred": 2
+  },
+  {
+    "nombre": "Pedro",
+    "apellido": "Ramírez",
+    "email": "pedro@example.com",
+    "password_hash": "hashed_password_3",
+    "id_cred": 1
+  }
+]
