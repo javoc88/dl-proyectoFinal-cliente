@@ -11,7 +11,7 @@ const Home = () => {
         <h1 className={styles.title}>Bienvenido a NexGen License Store</h1>
         <p className={styles.description}>
           Bienvenido a nuestro marketplace, donde ofrecemos precios
-          competitivos, una amplia gama de software y servicios adicionales para
+          competitivos y una amplia gama de software con licencias legales para
           satisfacer todas tus necesidades.
         </p>
         <Button variant="light" onClick={() => navigate("/productos")}>
