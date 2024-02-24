@@ -5,11 +5,28 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Lógica del login cuando tengamos el back-end
-    console.log(email, password);
-    // Por mientras no hay back-end
+    
+    try {
+      const response = await fetch("/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Authentication failed");
+      }
+
+      window.location.href = "/productos";
+
+      console.log("Usuario autenticado correctamente");
+    } catch (error) {
+      console.error("Error al autenticar al usuario:", error.message);
+    }
   };
 
   return (

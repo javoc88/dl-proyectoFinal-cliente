@@ -5,15 +5,32 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       alert("Las contraseñas no coinciden");
       return;
     }
-    // Lógica de registro a implementar con back-end
-    console.log("Registrado con:", email, password);
-    // Por mientras no hay back-end
+
+    try {
+      const response = await fetch("/api/users/registro", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al registrar usuario");
+      }
+
+      alert("¡Registro exitoso!");
+      // Redireccionar al usuario a otra página, iniciar sesión automáticamente, etc.
+    } catch (error) {
+      console.error("Error al registrar usuario:", error.message);
+      alert("Hubo un error al registrar usuario");
+    }
   };
 
   return (
