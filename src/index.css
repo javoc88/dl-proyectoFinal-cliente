@@ -10,6 +10,9 @@ body {
   font-family: "Montserrat";
   background-color: #fcfcd7;
   overflow-x: hidden;
+  position: relative;
+  padding-bottom: 4em;
+  min-height: 100vh;
 }
 
 .container-banner {
@@ -48,6 +51,12 @@ ul {
 .container {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.container-404 {
+  padding: 4rem;
+  margin-bottom: 20rem;
+  text-align: left;
 }
 
 .container-home {
@@ -112,6 +121,11 @@ ul {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 2rem auto;
   max-width: 800px;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
 }
 
 .form-group {
@@ -196,22 +210,10 @@ ul {
 }
 
 .login-form input {
-  width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 4px;
-}
-
-.login-form .login-remember {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  white-space: nowrap;
-}
-
-.login-form .login-remember label {
-  padding: 0px;
 }
 
 .login-form button {
