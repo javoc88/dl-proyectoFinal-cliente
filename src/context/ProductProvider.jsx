@@ -86,23 +86,23 @@ const ProductProvider = ({ children }) => {
     setShowPopUp(false);
   };
 
+  const contextValue = {
+    products,
+    cart,
+    setCart,
+    addToCart,
+    removeFromCart,
+    calculateTotal,
+    showPopUp,
+    handleAddToCart,
+    handleClosePopUp,
+    formatCurrency,
+    GetCartTotal,
+    GetTotalProductCount,
+  };
+
   return (
-    <ProductContext.Provider
-      value={{
-        products,
-        cart,
-        setCart,
-        addToCart,
-        removeFromCart,
-        calculateTotal,
-        showPopUp,
-        handleAddToCart,
-        handleClosePopUp,
-        formatCurrency,
-        GetCartTotal,
-        GetTotalProductCount,
-      }}
-    >
+    <ProductContext.Provider value={contextValue}>
       {children}
     </ProductContext.Provider>
   );
