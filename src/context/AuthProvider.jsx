@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -7,19 +8,16 @@ const AuthProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("users.json")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch users data");
-        }
-        return response.json();
-      })
-      .then(data => {
-        setUsers(data);
-      })
-      .catch(error => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(`${process.env.API_URL}/api/users`);
+        setUsers(response.data);
+      } catch (error) {
         console.error("Error fetching users data:", error);
-      });
+      }
+    };
+
+    fetchUsers();
 
     const userLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const userIsAdmin = localStorage.getItem("isAdmin") === "true";

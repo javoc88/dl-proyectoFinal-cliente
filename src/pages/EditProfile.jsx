@@ -1,23 +1,32 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const EditProfile = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!newPassword || newPassword !== confirmNewPassword) {
-      alert("Las contraseñas no coinciden o esta vacío.");
+      alert("Las contraseñas no coinciden o están vacías.");
       return;
     }
-    // Lógica de la contraseña dspes con back-end
-    console.log(
-      "Cambio de contraseña ingresado:",
-      currentPassword,
-      newPassword
-    );
-    // Por mientras sin API
+
+    try {
+      const response = await axios.post(
+        `${process.env.API_URL}/api/users/changePassword`,
+        {
+          currentPassword,
+          newPassword,
+        }
+      );
+      console.log("Contraseña cambiada exitosamente:", response.data.message);
+      // Aquí podrías redirigir al usuario a otra página o mostrar un mensaje de éxito
+    } catch (error) {
+      console.error("Error al cambiar la contraseña:", error.message);
+      alert("Hubo un error al cambiar la contraseña. Por favor, inténtalo de nuevo.");
+    }
   };
 
   return (

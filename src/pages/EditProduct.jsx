@@ -7,7 +7,7 @@ const EditProduct = ({ productId }) => {
     console.log("Formulario con data", formData, "Mode:", mode);
 
     axios
-      .put(`/api/products/${productId}`, formData)
+      .put(`${process.env.API_URL}/api/products/${productId}`, formData)
       .then((response) => {
         console.log("Producto editado!", response.data);
       })
@@ -18,7 +18,7 @@ const EditProduct = ({ productId }) => {
 
   const handleDelete = () => {
     axios
-      .delete(`/api/products/${productId}`)
+      .delete(`${process.env.API_URL}/api/products/${productId}`)
       .then((response) => {
         console.log("Producto eliminado!", response.data);
       })

@@ -13,18 +13,18 @@ const Products = () => {
     handleClosePopUp,
     showPopUp,
     formatCurrency,
-    isLoggedIn, // Nuevo estado para verificar si el usuario está logeado
+    isLoggedIn,
   } = useContext(ProductContext);
 
-  const [visibleProducts, setVisibleProducts] = useState(8); // Estado para controlar la cantidad de productos visibles
-  const [loading, setLoading] = useState(false); // Estado para controlar el estado de carga del botón "Cargar más productos"
+  const [visibleProducts, setVisibleProducts] = useState(8);
+  const [loading, setLoading] = useState(false);
 
   const loadMoreProducts = () => {
-    setLoading(true); // Activar el estado de carga al hacer clic en el botón
+    setLoading(true);
     setTimeout(() => {
-      setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 4); // Incrementar la cantidad de productos visibles al hacer clic en el botón
-      setLoading(false); // Desactivar el estado de carga después de cargar más productos
-    }, 1000); // Simulando una carga de 1 segundo antes de mostrar más productos
+      setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 4);
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -70,20 +70,17 @@ const Products = () => {
       </Row>
 
       {visibleProducts < products.length && (
-        // Mostrar el botón "Cargar más productos" si hay más productos disponibles para cargar
         <div className="text-center mt-4">
           <Button
             variant="secondary"
             onClick={loadMoreProducts}
-            disabled={loading} // Desactivar el botón mientras se está cargando
+            disabled={loading}
           >
             {loading ? (
-              // Mostrar un spinner de carga si el estado de carga está activo
               <>
                 <Spinner animation="border" size="sm" /> Cargando...
               </>
             ) : (
-              // Mostrar el texto normal si no se está cargando
               "Cargar más productos"
             )}
           </Button>

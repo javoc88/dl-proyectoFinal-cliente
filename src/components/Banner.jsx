@@ -1,16 +1,16 @@
-import React from 'react'
+import React from "react";
 
 const Banner = () => {
   return (
     <div className="container-banner d-none d-lg-block">
-    <div className="banner-text text-uppercase">
-      <p>
-        En tu primera compra obtén un descuento del 20% en todos nuestros
-        softwares.{" "}
-      </p>
+      <div className="banner-text text-uppercase">
+        <p>
+          Software de calidad, precios imbatibles: Tu futuro digital comienza
+          aquí.{" "}
+        </p>
+      </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default Banner
+export default Banner;

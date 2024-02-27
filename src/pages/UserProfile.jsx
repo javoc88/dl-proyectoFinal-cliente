@@ -12,7 +12,7 @@ const UserProfile = ({ user }) => {
         return;
       }
 
-      const response = await axios.post("/api/users/changePassword", {
+      const response = await axios.post(`${process.env.API_URL}/api/users/changePassword`, {
         userId: user.id_usuario,
         newPassword: newPassword
       });

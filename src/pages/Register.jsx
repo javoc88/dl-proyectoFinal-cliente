@@ -13,20 +13,23 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch("/api/users/registro", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        `${process.env.API_URL}/api/users/registro`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Error al registrar usuario");
       }
 
       alert("¡Registro exitoso!");
-      // Redireccionar al usuario a otra página, iniciar sesión automáticamente, etc.
+      history.push("/");
     } catch (error) {
       console.error("Error al registrar usuario:", error.message);
       alert("Hubo un error al registrar usuario");
