@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 
-const jwtDecode = require("jwt-decode");
 const API_URL = process.env.API_URL || "http://localhost:3001";
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
