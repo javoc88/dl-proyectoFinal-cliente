@@ -7,7 +7,7 @@ const EditProduct = ({ productId }) => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `${process.env.API_URL}/api/products/${productId}`,
+        `${process.env.REACT_APP_API_URL}/api/products/${productId}`,
         formData,
         {
           headers: {
@@ -26,7 +26,7 @@ const EditProduct = ({ productId }) => {
   const handleDelete = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`${process.env.API_URL}/api/products/${productId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/products/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

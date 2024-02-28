@@ -15,7 +15,7 @@ const ProductProvider = ({ children }) => {
   const getProducts = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`${API_URL}/api/products`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/products`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -54,7 +54,7 @@ const ProductProvider = ({ children }) => {
 
   const updateCart = async () => {
     const token = localStorage.getItem("token");
-    const response = await axios.put(`${API_URL}/api/cart/update`, userCart, {
+    const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/cart/update`, cart, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -64,7 +64,7 @@ const ProductProvider = ({ children }) => {
 
   const removeFromCart = async (productID) => {
     const token = localStorage.getItem("token");
-    await axios.delete(`${API_URL}/api/cart/${productID}`, {
+    await axios.delete(`${process.env.REACT_APP_API_URL}/api/cart/${productID}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -92,7 +92,7 @@ const ProductProvider = ({ children }) => {
     const token = localStorage.getItem("token");
     useEffect(() => {
       const fetchCartTotal = async () => {
-        const response = await axios.get(`${API_URL}/api/cart/total`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/cart/total`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -122,7 +122,7 @@ const ProductProvider = ({ children }) => {
     // Add the item to the cart in the backend
     const token = localStorage.getItem("token");
     await axios.post(
-      `${API_URL}/api/cart/addItem`,
+      `${process.env.REACT_APP_API_URL}/api/cart/addItem`,
       { productID, quantity: 1 },
       {
         headers: {

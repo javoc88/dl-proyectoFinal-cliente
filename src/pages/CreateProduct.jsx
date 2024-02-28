@@ -6,7 +6,7 @@ const CreateProduct = () => {
   const handleCreate = async (formData) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post(`${process.env.API_URL}/api/products`, formData, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/products`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
