@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -60,10 +61,12 @@ const LoginPage = () => {
           Login
         </Button>
         <Form.Text className="text-muted">
-          ¿No tienes una cuenta?{" "}
-          <a to="/registro">
-            Crea una cuenta <strong>aquí</strong>
-          </a>
+          ¿No tienes una cuenta?
+          <br />
+          Crea una cuenta{" "}
+          <Link to="/registro">
+            <strong>aquí</strong>
+          </Link>
         </Form.Text>
       </Form>
     </div>
