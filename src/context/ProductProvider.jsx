@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ProductContext from "../context/ProductContext";
+import axios from "axios";
 
 const formatter = new Intl.NumberFormat("es-CL", {
   style: "currency",
@@ -13,7 +14,15 @@ const ProductProvider = ({ children }) => {
 
   const getProducts = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/productos`);
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${API_URL}/api/products`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!res.ok) {
+        throw new Error("Error fetching products");
+      }
       const data = await res.json();
       setProducts(data);
     } catch (error) {
@@ -43,10 +52,26 @@ const ProductProvider = ({ children }) => {
     }
   };
 
-  const removeFromCart = (id) => {
+  const updateCart = async () => {
+    const token = localStorage.getItem("token");
+    const response = await axios.put(`${API_URL}/api/cart/update`, userCart, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setCart(response.data);
+  };
+
+  const removeFromCart = async (productID) => {
+    const token = localStorage.getItem("token");
+    await axios.delete(`${API_URL}/api/cart/${productID}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setCart((prevCart) => {
       const newCart = { ...prevCart };
-      delete newCart[id];
+      delete newCart[productID];
       return newCart;
     });
   };
@@ -59,13 +84,27 @@ const ProductProvider = ({ children }) => {
       }
       return acc;
     }, 0);
-
     return total.toFixed(2);
   };
 
   const GetCartTotal = () => {
-    const cartTotal = formatCurrency(calculateTotal());
-    return <span>Total: {cartTotal}</span>;
+    const [cartTotal, setCartTotal] = useState(0);
+    const token = localStorage.getItem("token");
+    useEffect(() => {
+      const fetchCartTotal = async () => {
+        const response = await axios.get(`${API_URL}/api/cart/total`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setCartTotal(response.data.total);
+      };
+      if (token) {
+        fetchCartTotal();
+      }
+    }, [token]);
+    const cartTotalFormatted = formatCurrency(cartTotal);
+    return <span>Total: {cartTotalFormatted}</span>;
   };
 
   const GetTotalProductCount = () => {
@@ -76,9 +115,24 @@ const ProductProvider = ({ children }) => {
     return <span>Total Products: {totalCount}</span>;
   };
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = async (product) => {
     const { id, ...rest } = product;
-    addToCart({ ...rest, id: id ? id.toString() : "" });
+    const productID = id ? id.toString() : "";
+
+    // Add the item to the cart in the backend
+    const token = localStorage.getItem("token");
+    await axios.post(
+      `${API_URL}/api/cart/addItem`,
+      { productID, quantity: 1 },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    // Add the item to the cart in the frontend
+    addToCart({ ...rest, id: productID });
     setShowPopUp(true);
   };
 
@@ -91,6 +145,7 @@ const ProductProvider = ({ children }) => {
     cart,
     setCart,
     addToCart,
+    updateCart,
     removeFromCart,
     calculateTotal,
     showPopUp,

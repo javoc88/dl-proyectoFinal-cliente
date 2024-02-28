@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,35 +8,35 @@ const RegisterPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleRegister = async (formData) => {
+    try {
+      const response = await axios.post(
+        `${process.env.API_URL}/api/users/registro`,
+        formData
+      );
+      console.log("Usuario registrado!", response.data);
+      // Redirect to the login page or show a success message
+      alert("¡Registro exitoso!");
+      navigate("/");
+    } catch (error) {
+      console.error("Error registrando el usuario", error.response.data);
+      // Show an error message
+      alert("Hubo un error al registrar usuario");
+    }
+  };
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       alert("Las contraseñas no coinciden");
       return;
     }
 
-    try {
-      const response = await fetch(
-        `${process.env.API_URL}/api/users/registro`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
 
-      if (!response.ok) {
-        throw new Error("Error al registrar usuario");
-      }
-
-      alert("¡Registro exitoso!");
-      navigate("/");
-    } catch (error) {
-      console.error("Error al registrar usuario:", error.message);
-      alert("Hubo un error al registrar usuario");
-    }
+    handleRegister(formData);
   };
 
   return (

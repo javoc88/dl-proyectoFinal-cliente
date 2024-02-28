@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
@@ -5,29 +6,25 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleLogin = async (formData) => {
     try {
-      const response = await fetch(`${process.env.API_URL}/api/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      
-
-      if (!response.ok) {
-        throw new Error("Authentication failed");
-      }
-
+      const response = await axios.post(`${process.env.API_URL}/api/users/login`, formData);
+      console.log("Usuario logueado!", response.data);
+      // Store the token in local storage and redirect to the product list page or show a success message
       window.location.href = "/productos";
-
-      console.log("Usuario autenticado correctamente");
     } catch (error) {
-      console.error("Error al autenticar al usuario:", error.message);
+      console.error("Error iniciando sesión", error.response.data);
+      // Show an error message
     }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+
+    handleLogin(formData);
   };
 
   return (

@@ -2,15 +2,43 @@ import React, { useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
 
+const jwtDecode = require("jwt-decode");
+const API_URL = process.env.API_URL || "http://localhost:3001";
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [users, setUsers] = useState([]);
 
+  const handleGetUser = async (userId) => {
+    try {
+      const response = await axios.get(
+        `${process.env.API_URL}/api/users/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Usuario obtenido!", response.data);
+      // Update the user data in the component state
+    } catch (error) {
+      console.error("Error obteniendo el usuario", error.response.data);
+      // Show an error message
+    }
+  };
+
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decoded = jwtDecode(token);
+      setIsLoggedIn(true);
+      setIsAdmin(decoded.role === "admin");
+      handleGetUser(decoded.id);
+    }
+
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`${process.env.API_URL}/api/users`);
+        const response = await axios.get(`${API_URL}/api/users`);
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users data:", error);
@@ -18,11 +46,6 @@ const AuthProvider = ({ children }) => {
     };
 
     fetchUsers();
-
-    const userLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    const userIsAdmin = localStorage.getItem("isAdmin") === "true";
-    setIsLoggedIn(userLoggedIn);
-    setIsAdmin(userIsAdmin);
   }, []);
 
   // Función para iniciar sesión
@@ -52,12 +75,11 @@ const AuthProvider = ({ children }) => {
     login,
     logout,
     setAdminRole,
+    handleGetUser,
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 

@@ -5,22 +5,22 @@ const UserProfile = ({ user }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-  const handleChangePasswordClick = async () => {
+  const handleChangePassword = async () => {
     try {
       if (newPassword !== confirmNewPassword) {
         alert("Las contraseñas no coinciden");
         return;
       }
 
-      const response = await axios.post(`${process.env.API_URL}/api/users/changePassword`, {
-        userId: user.id_usuario,
-        newPassword: newPassword
-      });
+      const formData = new FormData();
+      formData.append("userId", user.id_usuario);
+      formData.append("newPassword", newPassword);
 
+      const response = await axios.post(`${process.env.API_URL}/api/users/changePassword`, formData);
       console.log(response.data);
       alert("Contraseña cambiada exitosamente");
     } catch (error) {
-      console.error("Error al cambiar la contraseña:", error);
+      console.error("Error al cambiar la contraseña:", error.response.data);
       alert("Hubo un error al cambiar la contraseña. Por favor, inténtalo de nuevo más tarde.");
     }
   };
@@ -50,7 +50,7 @@ const UserProfile = ({ user }) => {
             onChange={(e) => setConfirmNewPassword(e.target.value)}
             placeholder="Confirmar Nueva Contraseña"
           />
-          <button onClick={handleChangePasswordClick}>Cambiar Contraseña</button>
+          <button onClick={handleChangePassword}>Cambiar Contraseña</button>
         </div>
       </div>
     </div>

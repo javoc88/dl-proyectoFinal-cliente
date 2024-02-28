@@ -3,16 +3,20 @@ import ProductForm from "../components/ProductForm";
 import axios from "axios";
 
 const CreateProduct = () => {
-  const handleCreate = (formData, mode) => {
-    console.log("Formulario con data", formData, "Mode:", mode);
-    axios
-      .post(`${process.env.API_URL}/api/products`, formData)
-      .then((response) => {
-        console.log("Producto creado!", response.data);
-      })
-      .catch((error) => {
-        console.error("Error creando el producto", error);
+  const handleCreate = async (formData) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(`${process.env.API_URL}/api/products`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+      console.log("Producto creado!", response.data);
+      // Redirect to the product page or show a success message
+    } catch (error) {
+      console.error("Error creando el producto", error.response.data);
+      // Show an error message
+    }
   };
 
   return <ProductForm mode="create" onSubmit={handleCreate} />;

@@ -1,18 +1,80 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProductContext from "../context/ProductContext";
 import { CartX } from "react-bootstrap-icons";
+import axios from "axios";
 
 const CartPage = () => {
   const {
     cart,
+    addToCart,
+    GetCartTotal,
+    updateCart,
     removeFromCart,
     formatCurrency,
     calculateTotal,
     products,
     setCart,
   } = useContext(ProductContext);
+
+  const [userCart, setUserCart] = useState(cart);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`${API_URL}/api/cart`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUserCart(response.data);
+    };
+    fetchData();
+  }, []);
+
+  const handleAddToCart = (product) => {
+    const { id, ...rest } = product;
+    const productID = id ? id.toString() : "";
+    addToCart({ ...rest, id: productID });
+  };
+
+  const handleUpdateCart = (productID, quantity) => {
+    const token = localStorage.getItem("token");
+    axios
+      .put(
+        `${API_URL}/api/cart/updateItem`,
+        { productID, quantity },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        setCart(response.data);
+      })
+      .catch((error) => {
+        console.error("Error updating cart data:", error);
+      });
+  };
+
+  const handleRemoveFromCart = (productID) => {
+    const token = localStorage.getItem("token");
+    axios
+      .delete(`${API_URL}/api/cart/removeItem`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: { productID },
+      })
+      .then((response) => {
+        setCart(response.data);
+      })
+      .catch((error) => {
+        console.error("Error removing item from cart:", error);
+      });
+  };
 
   const incrementQuantity = (productID) => {
     setCart((prevCart) => ({
@@ -92,6 +154,7 @@ const CartPage = () => {
           );
         })}
       </ListGroup>
+      <GetCartTotal />
       {Object.keys(cart).length > 0 && (
         <div className="d-flex justify-content-between align-items-center mt-3">
           <h4>
