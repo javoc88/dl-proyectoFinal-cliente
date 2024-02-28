@@ -55,18 +55,24 @@ const LoginPage = () => {
           />
         </Form.Group>
         <Form.Group controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Recordar sesión" />
+          <Form.Check
+            type="checkbox"
+            label="Recordar sesión"
+          />
         </Form.Group>
         <Button variant="secondary" type="submit">
           Login
         </Button>
         <Form.Text className="text-muted">
-          ¿No tienes una cuenta?
-          <br />
-          Crea una cuenta{" "}
-          <Link to="/registro">
-            <strong>aquí</strong>
-          </Link>
+          <div className="justify-content-center pt-2">
+            <p>
+              ¿No tienes una cuenta?
+              <br />
+              <Link to="/registro">
+                <strong>Crea una cuenta aquí</strong>
+              </Link>
+            </p>
+          </div>
         </Form.Text>
       </Form>
     </div>
