@@ -13,7 +13,7 @@ const ProductProvider = ({ children }) => {
 
   const getProducts = async () => {
     try {
-      const res = await fetch(`${process.env.API_URL}/api/productos`);
+      const res = await fetch(`${API_URL}/api/productos`);
       const data = await res.json();
       setProducts(data);
     } catch (error) {

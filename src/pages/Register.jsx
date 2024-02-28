@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom"; // Importa useHistory
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  
+  // Usa useHistory para acceder al objeto history
+  const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,7 +33,7 @@ const RegisterPage = () => {
       }
 
       alert("¡Registro exitoso!");
-      history.push("/");
+      history.push("/"); // Redirige al usuario a la página de inicio
     } catch (error) {
       console.error("Error al registrar usuario:", error.message);
       alert("Hubo un error al registrar usuario");
