@@ -23,9 +23,9 @@ const AppRouter = () => {
       <Route path="/productos" element={<GalleryPage />} />
       <Route path="/productos/:id" element={<ProductPage />} />
       <Route path="/crear" element={<CreateProduct />} />
-      <Route path="/editar" element={<EditProduct />} />
+      <Route path="/editar/:id" element={<EditProduct />} />
       <Route path="/cart" element={<CartPage />} />
-      <Route path="/*" element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
