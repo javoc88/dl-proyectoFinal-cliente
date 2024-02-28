@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
-const API_URL = process.env.API_URL || "http://localhost:3001";
+const API_URL = typeof window !== "undefined" && window.location.hostname === "localhost" ? "http://localhost:3001" : process.env.API_URL;
+
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -12,7 +13,7 @@ const AuthProvider = ({ children }) => {
   const handleGetUser = async (userId) => {
     try {
       const response = await axios.get(
-        `${process.env.API_URL}/api/users/${userId}`,
+        `${API_URL}/api/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
