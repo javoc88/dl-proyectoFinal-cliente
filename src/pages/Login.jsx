@@ -8,7 +8,10 @@ const LoginPage = () => {
 
   const handleLogin = async (formData) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, formData);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/users/login`,
+        formData
+      );
       console.log("Usuario logueado!", response.data);
       // Store the token in local storage and redirect to the product list page or show a success message
       window.location.href = "/productos";
@@ -58,7 +61,7 @@ const LoginPage = () => {
         </Button>
         <Form.Text className="text-muted">
           ¿No tienes una cuenta?{" "}
-          <a href="/registro">
+          <a to="/registro">
             Crea una cuenta <strong>aquí</strong>
           </a>
         </Form.Text>
