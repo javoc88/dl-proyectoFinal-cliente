@@ -11,12 +11,18 @@ const LoginPage = () => {
   const handleLogin = async () => {
     try {
       const response = await axios.post(ENDPOINT.login, user);
+      const token = response.data.token; // Obtener el token de la respuesta
+      localStorage.setItem("token", token); // Almacenar el token en el almacenamiento local
       console.log("Usuario logueado!", response.data);
-      // Store the token in local storage and redirect to the product list page or show a success message
+      // Redirigir a la página de productos después de iniciar sesión
       window.location.href = "/productos";
     } catch (error) {
       console.error("Error iniciando sesión", error.response.data);
-      // Show an error message
+      // Mostrar un mensaje de error en caso de fallo de inicio de sesión
+      setError({
+        email: "Error al iniciar sesión",
+        password: "Error al iniciar sesión",
+      });
     }
   };
 
@@ -27,12 +33,18 @@ const LoginPage = () => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
     if (!emailRegex.test(user.email)) {
-      setError((prevError) => ({ ...prevError, email: "El formato del email no es correcto" }));
+      setError((prevError) => ({
+        ...prevError,
+        email: "El formato del email no es correcto",
+      }));
       return;
     }
 
     if (!user.password) {
-      setError((prevError) => ({ ...prevError, password: "La contraseña es requerida" }));
+      setError((prevError) => ({
+        ...prevError,
+        password: "La contraseña es requerida",
+      }));
       return;
     }
 
@@ -59,7 +71,9 @@ const LoginPage = () => {
             required
             isInvalid={!!error.email}
           />
-          <Form.Control.Feedback type="invalid">{error.email}</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">
+            {error.email}
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Control
@@ -71,7 +85,9 @@ const LoginPage = () => {
             required
             isInvalid={!!error.password}
           />
-          <Form.Control.Feedback type="invalid">{error.password}</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">
+            {error.password}
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Recordar sesión" />
