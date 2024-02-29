@@ -7,31 +7,28 @@ const formatter = new Intl.NumberFormat("es-CL", {
   currency: "CLP",
 });
 
-
 const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [showPopUp, setShowPopUp] = useState(false);
 
   const getProducts = async () => {
-  try {
-    const token = localStorage.getItem("token");
-    const res = await axios(`${import.meta.env.VITE_APP_URL}/api/products`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(import.meta.env.VITE_APP_URL);
-    console.log("Response:", res);
-    if (!res.ok) {
-      throw new Error("Error fetching products");
+    try {
+      const token = localStorage.getItem("token");
+      const apiUrl = import.meta.env.VITE_APP_URL;
+      const url = `${apiUrl}/api/products`;
+      console.log("URL de la solicitud:", url);
+      const res = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Respuesta de la solicitud:", res.data);
+      setProducts(res.data);
+    } catch (error) {
+      console.error("Error fetching products data:", error);
     }
-    const data = await res.json();
-    setProducts(data);
-  } catch (error) {
-    console.error("Error fetching products data:", error);
-  }
-};
+  };
 
   useEffect(() => {
     getProducts();
@@ -57,21 +54,28 @@ const ProductProvider = ({ children }) => {
 
   const updateCart = async () => {
     const token = localStorage.getItem("token");
-    const response = await axios.put(`${import.meta.env.VITE_APP_URL}/api/cart/update`, cart, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.put(
+      `${import.meta.env.VITE_APP_URL}/api/cart/update`,
+      cart,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     setCart(response.data);
   };
 
   const removeFromCart = async (productID) => {
     const token = localStorage.getItem("token");
-    await axios.delete(`${import.meta.env.VITE_APP_URL}/api/cart/${productID}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    await axios.delete(
+      `${import.meta.env.VITE_APP_URL}/api/cart/${productID}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     setCart((prevCart) => {
       const newCart = { ...prevCart };
       delete newCart[productID];
@@ -95,11 +99,14 @@ const ProductProvider = ({ children }) => {
     const token = localStorage.getItem("token");
     useEffect(() => {
       const fetchCartTotal = async () => {
-        const response = await axios.get(`${import.meta.env.VITE_APP_URL}/api/cart/total`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `${import.meta.env.VITE_APP_URL}/api/cart/total`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setCartTotal(response.data.total);
       };
       if (token) {
