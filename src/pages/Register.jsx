@@ -7,6 +7,8 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [firstName, setFirstName] = useState(""); // Nuevo estado para el nombre
+  const [lastName, setLastName] = useState(""); // Nuevo estado para el apellido
   const navigate = useNavigate();
 
   const handleRegister = async (formData) => {
@@ -36,6 +38,8 @@ const RegisterPage = () => {
     const formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
+    formData.append("nombre", firstName); // Agregar nombre al formulario
+    formData.append("apellido", lastName); // Agregar apellido al formulario
 
     handleRegister(formData);
   };
@@ -49,6 +53,20 @@ const RegisterPage = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
+          required
+        />
+        <input
+          type="text"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          placeholder="Nombre"
+          required
+        />
+        <input
+          type="text"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          placeholder="Apellido"
           required
         />
         <input
