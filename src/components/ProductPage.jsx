@@ -15,7 +15,7 @@ const ProductPage = () => {
   } = useContext(ProductContext);
 
   const { id } = useParams();
-  const product = products.find((product) => product.id === id);
+  const product = products.find((product) => product.id_producto === id);
 
   if (!product) {
     return (
