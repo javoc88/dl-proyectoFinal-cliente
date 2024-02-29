@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_BASE_URL } from "../config/constants.js";
+import { ENDPOINT } from "../config/constants.js"; // Importamos ENDPOINT
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ const RegisterPage = () => {
   const handleRegister = async (formData) => {
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/api/users/registro`,
+        ENDPOINT.users, // Utilizamos la URL del endpoint definida en constants.js
         formData
       );
       console.log("Usuario registrado!", response.data);
@@ -30,6 +30,13 @@ const RegisterPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // Validación de formato de email utilizando expresión regular
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (!emailRegex.test(email)) {
+      alert("El formato del email no es correcto");
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert("Las contraseñas no coinciden");
       return;

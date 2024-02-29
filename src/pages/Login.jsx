@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { API_BASE_URL } from "../config/constants.js";
+import { ENDPOINT } from "../config/constants.js"; // Importamos ENDPOINT
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ const LoginPage = () => {
   const handleLogin = async (formData) => {
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/api/users/login`,
+        ENDPOINT.login, // Utilizamos la URL del endpoint definida en constants.js
         formData
       );
       console.log("Usuario logueado!", response.data);
@@ -25,6 +25,13 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // Validación de formato de email utilizando expresión regular
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (!emailRegex.test(email)) {
+      alert("El formato del email no es correcto");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
@@ -56,10 +63,7 @@ const LoginPage = () => {
           />
         </Form.Group>
         <Form.Group controlId="formBasicCheckbox">
-          <Form.Check
-            type="checkbox"
-            label="Recordar sesión"
-          />
+          <Form.Check type="checkbox" label="Recordar sesión" />
         </Form.Group>
         <Button variant="secondary" type="submit">
           Login
