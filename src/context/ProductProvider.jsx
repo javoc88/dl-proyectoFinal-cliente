@@ -16,7 +16,7 @@ const ProductProvider = ({ children }) => {
   const getProducts = async () => {
   try {
     const token = localStorage.getItem("token");
-    const res = await axios(`${import.meta.env.VITE_APP_URL}/products`, {
+    const res = await axios(`${import.meta.env.VITE_APP_URL}/api/products`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
