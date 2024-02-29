@@ -1,13 +1,14 @@
 import React from "react";
 import axios from "axios";
 import ProductForm from "../components/ProductForm";
+import { API_BASE_URL } from "../config/constants.js";
 
 const EditProduct = ({ productId }) => {
   const handleEdit = async (formData, mode) => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `${import.meta.env.VITE_APP_URL}/api/products/${productId}`,
+        `${API_BASE_URL}/api/products/${productId}`,
         formData,
         {
           headers: {
@@ -26,7 +27,7 @@ const EditProduct = ({ productId }) => {
   const handleDelete = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`${import.meta.env.VITE_APP_URL}/api/products/${productId}`, {
+      await axios.delete(`${API_BASE_URL}/api/products/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

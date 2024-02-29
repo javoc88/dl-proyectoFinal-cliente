@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../config/constants.js";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ const LoginPage = () => {
   const handleLogin = async (formData) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_APP_URL}/api/users/login`,
+        `${API_BASE_URL}/api/users/login`,
         formData
       );
       console.log("Usuario logueado!", response.data);

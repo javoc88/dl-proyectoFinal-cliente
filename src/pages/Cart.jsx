@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import ProductContext from "../context/ProductContext";
 import { CartX } from "react-bootstrap-icons";
 import axios from "axios";
+import { API_BASE_URL } from "../config/constants.js";
 
 const CartPage = () => {
   const {
@@ -22,13 +23,17 @@ const CartPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      const response = await axios.get(`${import.meta.env.VITE_APP_URL}/api/cart`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUserCart(response.data);
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`${API_BASE_URL}/api/cart`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUserCart(response.data);
+      } catch (error) {
+        console.error("Error fetching cart data:", error);
+      }
     };
     fetchData();
   }, []);
@@ -43,7 +48,7 @@ const CartPage = () => {
     const token = localStorage.getItem("token");
     axios
       .put(
-        `${import.meta.env.VITE_APP_URL}/api/cart/updateItem`,
+        `${API_BASE_URL}/api/cart/updateItem`,
         { productID, quantity },
         {
           headers: {
@@ -62,7 +67,7 @@ const CartPage = () => {
   const handleRemoveFromCart = (productID) => {
     const token = localStorage.getItem("token");
     axios
-      .delete(`${import.meta.env.VITE_APP_URL}/api/cart/removeItem`, {
+      .delete(`${API_BASE_URL}/api/cart/removeItem`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

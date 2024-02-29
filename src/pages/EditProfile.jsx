@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../config/constants.js";
 
 const EditProfile = () => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -14,13 +15,10 @@ const EditProfile = () => {
     }
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_APP_URL}/api/users/changePassword`,
-        {
-          currentPassword,
-          newPassword,
-        }
-      );
+      const response = await axios.post(`${API_BASE_URL}/api/users/changePassword`, {
+        currentPassword,
+        newPassword,
+      });
       console.log("Contraseña cambiada exitosamente:", response.data.message);
       // Aquí podrías redirigir al usuario a otra página o mostrar un mensaje de éxito
     } catch (error) {

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-
-const API_URL = typeof window !== "undefined" && window.location.hostname === "localhost" ? "http://localhost:3001" : process.env.API_URL;
+import { API_BASE_URL } from "../config/constants.js";
 
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,8 +11,9 @@ const AuthProvider = ({ children }) => {
 
   const handleGetUser = async (userId) => {
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${import.meta.env.VITE_APP_URL}/api/users/${userId}`,
+        `${API_BASE_URL}/api/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
 
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_URL}/api/users`);
+        const response = await axios.get(`${API_BASE_URL}/api/users`);
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users data:", error);

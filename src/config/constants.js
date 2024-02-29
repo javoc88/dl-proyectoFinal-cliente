@@ -1,3 +1,1 @@
-const { VITE_APP_URL } = import.meta.env;
-
-export const URLBASE = VITE_APP_URL;
+export const API_BASE_URL = import.meta.env.VITE_APP_URL;

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config/constants.js";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ const RegisterPage = () => {
   const handleRegister = async (formData) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_APP_URL}/api/users/registro`,
+        `${API_BASE_URL}/api/users/registro`,
         formData
       );
       console.log("Usuario registrado!", response.data);

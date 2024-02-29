@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductContext from "../context/ProductContext";
 import axios from "axios";
+import { API_BASE_URL } from "../config/constants.js";
 
 const formatter = new Intl.NumberFormat("es-CL", {
   style: "currency",
@@ -15,15 +16,12 @@ const ProductProvider = ({ children }) => {
   const getProducts = async () => {
     try {
       const token = localStorage.getItem("token");
-      const apiUrl = import.meta.env.VITE_APP_URL;
-      const url = `${apiUrl}/api/products`;
-      console.log("URL de la solicitud:", url);
+      const url = `${API_BASE_URL}/api/products`;
       const res = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Respuesta de la solicitud:", res.data);
       setProducts(res.data);
     } catch (error) {
       console.error("Error fetching products data:", error);
@@ -54,28 +52,21 @@ const ProductProvider = ({ children }) => {
 
   const updateCart = async () => {
     const token = localStorage.getItem("token");
-    const response = await axios.put(
-      `${import.meta.env.VITE_APP_URL}/api/cart/update`,
-      cart,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axios.put(`${API_BASE_URL}/api/cart/update`, cart, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setCart(response.data);
   };
 
   const removeFromCart = async (productID) => {
     const token = localStorage.getItem("token");
-    await axios.delete(
-      `${import.meta.env.VITE_APP_URL}/api/cart/${productID}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    await axios.delete(`${API_BASE_URL}/api/cart/${productID}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setCart((prevCart) => {
       const newCart = { ...prevCart };
       delete newCart[productID];
@@ -132,7 +123,7 @@ const ProductProvider = ({ children }) => {
     // Add the item to the cart in the backend
     const token = localStorage.getItem("token");
     await axios.post(
-      `${import.meta.env.VITE_APP_URL}/api/cart/addItem`,
+      `${API_BASE_URL}/api/cart/addItem`,
       { productID, quantity: 1 },
       {
         headers: {

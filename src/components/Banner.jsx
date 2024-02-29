@@ -6,7 +6,7 @@ const Banner = () => {
       <div className="banner-text text-uppercase">
         <p>
           Software de calidad, precios imbatibles: Tu futuro digital comienza
-          aquí.{" "}
+          aquí.
         </p>
       </div>
     </div>
