@@ -48,7 +48,7 @@ const Products = () => {
                     </Card.Footer>
                   </div>
                   <div>
-                    <Link to={`/productos/${product.id}`}>
+                    <Link to={`/productos/${product.id_producto}`}>
                       <Button variant="secondary" className="w-100 mb-2">
                         Más detalles 🔍
                       </Button>
