@@ -5,15 +5,12 @@ import { Link } from "react-router-dom";
 import { ENDPOINT } from "../config/constants.js"; // Importamos ENDPOINT
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [user, setUser] = useState({ email: "", password: "" });
+  const [error, setError] = useState({ email: "", password: "" });
 
-  const handleLogin = async (formData) => {
+  const handleLogin = async () => {
     try {
-      const response = await axios.post(
-        ENDPOINT.login, // Utilizamos la URL del endpoint definida en constants.js
-        formData
-      );
+      const response = await axios.post(ENDPOINT.login, user);
       console.log("Usuario logueado!", response.data);
       // Store the token in local storage and redirect to the product list page or show a success message
       window.location.href = "/productos";
@@ -25,18 +22,26 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Validación de formato de email utilizando expresión regular
+    setError({ email: "", password: "" });
+
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    if (!emailRegex.test(email)) {
-      alert("El formato del email no es correcto");
+
+    if (!emailRegex.test(user.email)) {
+      setError((prevError) => ({ ...prevError, email: "El formato del email no es correcto" }));
       return;
     }
 
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
+    if (!user.password) {
+      setError((prevError) => ({ ...prevError, password: "La contraseña es requerida" }));
+      return;
+    }
 
-    handleLogin(formData);
+    handleLogin();
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
   return (
@@ -47,20 +52,26 @@ const LoginPage = () => {
         <Form.Group controlId="formBasicEmail">
           <Form.Control
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={user.email}
+            onChange={handleChange}
             placeholder="Email"
             required
+            isInvalid={!!error.email}
           />
+          <Form.Control.Feedback type="invalid">{error.email}</Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Control
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={user.password}
+            onChange={handleChange}
             placeholder="Contraseña"
             required
+            isInvalid={!!error.password}
           />
+          <Form.Control.Feedback type="invalid">{error.password}</Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Recordar sesión" />

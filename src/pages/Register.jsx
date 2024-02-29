@@ -13,7 +13,7 @@ const RegisterPage = () => {
 
   const handleRegister = async (formData) => {
     try {
-      const response = await axios.post(
+      const response = await axios.create(
         ENDPOINT.users, // Utilizamos la URL del endpoint definida en constants.js
         formData
       );
