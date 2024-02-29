@@ -40,7 +40,7 @@ const ProductPage = () => {
               <h2 className="mb-4 text-capitalize">{product.nombre}</h2>
               <hr />
               <p>{product.descripcion}</p>
-              <p>
+              {/* <p>
                 <strong>Especificaciones:</strong>
                 {Object.entries(product.detalle).map(([key, value]) => {
                   const specName =
@@ -71,7 +71,7 @@ const ProductPage = () => {
                     </p>
                   );
                 })}
-              </p>
+              </p> */}
               <p>
                 <strong>Precio:</strong> {formatCurrency(product.precio)}
               </p>
