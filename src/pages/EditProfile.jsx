@@ -15,7 +15,7 @@ const EditProfile = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/users/changePassword`,
+        `${import.meta.env.VITE_APP_URL}/api/users/changePassword`,
         {
           currentPassword,
           newPassword,

@@ -23,7 +23,7 @@ const CartPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/cart`, {
+      const response = await axios.get(`${import.meta.env.VITE_APP_URL}/api/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,7 +43,7 @@ const CartPage = () => {
     const token = localStorage.getItem("token");
     axios
       .put(
-        `${process.env.REACT_APP_API_URL}/api/cart/updateItem`,
+        `${import.meta.env.VITE_APP_URL}/api/cart/updateItem`,
         { productID, quantity },
         {
           headers: {
@@ -62,7 +62,7 @@ const CartPage = () => {
   const handleRemoveFromCart = (productID) => {
     const token = localStorage.getItem("token");
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/api/cart/removeItem`, {
+      .delete(`${import.meta.env.VITE_APP_URL}/api/cart/removeItem`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

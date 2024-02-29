@@ -16,7 +16,7 @@ const UserProfile = ({ user }) => {
       formData.append("userId", user.id_usuario);
       formData.append("newPassword", newPassword);
 
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/changePassword`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_APP_URL}/api/users/changePassword`, formData);
       console.log(response.data);
       alert("Contraseña cambiada exitosamente");
     } catch (error) {

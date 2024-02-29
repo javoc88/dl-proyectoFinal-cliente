@@ -11,7 +11,7 @@ const RegisterPage = () => {
   const handleRegister = async (formData) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/users/registro`,
+        `${import.meta.env.VITE_APP_URL}/api/users/registro`,
         formData
       );
       console.log("Usuario registrado!", response.data);

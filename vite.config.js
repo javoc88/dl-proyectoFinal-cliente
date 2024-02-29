@@ -1,15 +1,7 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import dotenv from "dotenv";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-dotenv.config();
-
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  define: {
-    "process.env": Object.keys(process.env).reduce((acc, key) => {
-      acc[`process.env.${key}`] = JSON.stringify(process.env[key]);
-      return acc;
-    }, {}),
-  },
-});
+})
